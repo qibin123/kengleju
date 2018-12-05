@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  mongo-express:
+    hostname: mongo-express
+    restart: always
+    image: mongo-express
+    ports:
+      - "8088:8081"
+    depends_on:
+      - mongo
+    networks:
+      - vsl
+
+  mongo:
+    hostname: mongo
+    restart: always
+    image: mongo:4.1.1-xenial
+    ports:
+      - "27017:27017"
+    volumes:
+      - './data:/data/db'
+    networks:
+      - vsl
+
+  rabbitmq:
+    hostname: rabbitmq
+    restart: always
+    image: rabbitmq:3.7.7-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - vsl
+
+networks:
+  vsl:
+    driver: bridge

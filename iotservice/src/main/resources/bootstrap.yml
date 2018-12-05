@@ -1,0 +1,17 @@
+spring:
+  application:
+      name: iot
+  cloud:
+    config:
+      uri: http://localhost:5000
+      label: master
+
+---
+spring:
+  profiles: docker
+  application:
+    name: iot
+  cloud:
+    config:
+      uri: http://configserver:5000
+      label: master
